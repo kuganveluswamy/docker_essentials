@@ -1,0 +1,49 @@
+kuganveluswamy$ docker build -t simpleapp .
+Sending build context to Docker daemon  24.06kB
+Step 1/8 : FROM python:3.7.3-alpine3.9
+ ---> fe3ef29c73f3
+Step 2/8 : RUN mkdir -p /app
+ ---> Using cache
+ ---> c2e424e2f5da
+Step 3/8 : WORKDIR /app
+ ---> Using cache
+ ---> 49287b60ef43
+Step 4/8 : COPY ./src/requirements.txt /app/requirements.txt
+ ---> d4de813a706d
+Step 5/8 : RUN pip install -r requirements.txt
+ ---> Running in eb4d0cc13246
+Collecting Flask==1.0.3 (from -r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/9a/74/670ae9737d14114753b8c8fdf2e8bd212a05d3b361ab15b44937dfd40985/Flask-1.0.3-py2.py3-none-any.whl (92kB)
+Collecting Werkzeug>=0.14 (from Flask==1.0.3->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/cc/94/5f7079a0e00bd6863ef8f1da638721e9da21e5bacee597595b318f71d62e/Werkzeug-1.0.1-py2.py3-none-any.whl (298kB)
+Collecting Jinja2>=2.10 (from Flask==1.0.3->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/7e/c2/1eece8c95ddbc9b1aeb64f5783a9e07a286de42191b7204d67b7496ddf35/Jinja2-2.11.3-py2.py3-none-any.whl (125kB)
+Collecting itsdangerous>=0.24 (from Flask==1.0.3->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl
+Collecting click>=5.1 (from Flask==1.0.3->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/d2/3d/fa76db83bf75c4f8d338c2fd15c8d33fdd7ad23a9b5e57eb6c5de26b430e/click-7.1.2-py2.py3-none-any.whl (82kB)
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.10->Flask==1.0.3->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/b9/2e/64db92e53b86efccfaea71321f597fa2e1b2bd3853d8ce658568f7a13094/MarkupSafe-1.1.1.tar.gz
+Building wheels for collected packages: MarkupSafe
+  Building wheel for MarkupSafe (setup.py): started
+  Building wheel for MarkupSafe (setup.py): finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/f2/aa/04/0edf07a1b8a5f5f1aed7580fffb69ce8972edc16a505916a77
+Successfully built MarkupSafe
+Installing collected packages: Werkzeug, MarkupSafe, Jinja2, itsdangerous, click, Flask
+Successfully installed Flask-1.0.3 Jinja2-2.11.3 MarkupSafe-1.1.1 Werkzeug-1.0.1 click-7.1.2 itsdangerous-1.1.0
+WARNING: You are using pip version 19.1.1, however version 21.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+Removing intermediate container eb4d0cc13246
+ ---> db47f190f356
+Step 6/8 : COPY ./src/ /app/
+ ---> 6abca3409f64
+Step 7/8 : ENV FLASK_APP=server.py
+ ---> Running in d95c50fe612e
+Removing intermediate container d95c50fe612e
+ ---> 5160a1dac694
+Step 8/8 : CMD flask run -h 0.0.0.0 -p 5000
+ ---> Running in 1a0a17de21cf
+Removing intermediate container 1a0a17de21cf
+ ---> 3c648c876b3b
+Successfully built 3c648c876b3b
+Successfully tagged simpleapp:latest
